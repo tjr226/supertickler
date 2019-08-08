@@ -1,0 +1,32 @@
+{
+  "name": "supertickler",
+  "version": "1.0.0",
+  "description": "DATA STRUCTURES for v0.1, Aug. 8 2019 BRANCH: backend-alpha",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjr226/supertickler.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tjr226/supertickler/issues"
+  },
+  "homepage": "https://github.com/tjr226/supertickler#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "cross-env": "^5.2.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "helmet": "^3.20.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.19.1",
+    "moment": "^2.24.0",
+    "nodemon": "^1.19.1",
+    "sqlite3": "^4.0.9"
+  }
+}
