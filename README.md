@@ -13,7 +13,7 @@ id, integer
 task_text, string, 1024 chars
 completed_boolean, integer
 hidden_boolean, integer
-sequence_unix_timestamp, integer
+unix_timestamp, integer
 user_id, integer, FK
 
 # ENDPOINTS
