@@ -4,7 +4,8 @@
   "description": "DATA STRUCTURES for v0.1, Aug. 8 2019 BRANCH: backend-alpha",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
