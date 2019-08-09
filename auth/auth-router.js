@@ -4,8 +4,9 @@ const jwt = require('jsonwebtoken');
 
 const Users = require('../users/users-model.js');
 const secrets = require('../config/secrets.js');
+const middleware = require('../middleware/middleware.js');
 
-router.post('/register', validateUser, (req, res) => {
+router.post('/register', middleware.validateUser, (req, res) => {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 10);
     user.password = hash;
@@ -19,7 +20,7 @@ router.post('/register', validateUser, (req, res) => {
         })
 })
 
-router.post('/login', validateUser, (req, res) => {
+router.post('/login', middleware.validateUser, (req, res) => {
     const { email, password } = req.body;
     Users.findBy({ email })
     .first()
@@ -51,16 +52,5 @@ function generateToken(user) {
 
     return jwt.sign(payload, secrets.jwtSecret, options);
 };
-
-function validateUser(req, res, next) {
-    const userInfo = req.body;
-    if (userInfo.email === undefined) {
-        return res.status(400).json({ errorMessage: "Please provide email." });
-    } else if (userInfo.password === undefined) {
-        return res.status(400).json({ errorMessage: "Please provide password." });
-    } else {
-        next();
-    }
-}
 
 module.exports = router;
