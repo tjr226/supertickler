@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { completeTask } from '../Actions';
+import { completeTask, hideTask, hideTaskWeek, hideTaskMonth, hideTaskYear } from '../Actions';
 import moment from 'moment';
 import styled from 'styled-components';
-import PushTask from './PushTask';
 
 const TaskDiv = styled.div`
     display:flex;
@@ -29,19 +28,34 @@ class TaskItem extends React.Component {
         this.props.hideTask(this.props.task.id);
     }
 
+    hideTaskWeek = e => {
+        e.preventDefault();
+        this.props.hideTaskWeek(this.props.task.id);
+    }
+
+    hideTaskMonth = e => {
+        e.preventDefault();
+        this.props.hideTaskMonth(this.props.task.id);
+    }
+
+    hideTaskYear = e => {
+        e.preventDefault();
+        this.props.hideTaskYear(this.props.task.id);
+    }
+
 
     render() {
         return (
             <TaskDiv>
                 <p>{this.props.task.task_text}</p>
                 <p>{moment.unix(this.props.task.unix_timestamp/1000).format('LL')}</p>
-                <PushTask taskID={this.props.task.id} />
-
-                <button className="btn btn-secondary">Hide</button>
-                <button className="btn btn-secondary">Complete</button>
+                <button onClick={this.hideTaskWeek} className="btn btn-secondary">Hide 1 Week</button>
+                <button onClick={this.hideTaskMonth} className="btn btn-secondary">Hide 1 Month</button>
+                <button onClick={this.hideTaskYear} className="btn btn-secondary">Hide 1 Year</button>
+                <button onClick={this.completeTask} className="btn btn-secondary">Complete</button>
             </TaskDiv>
         )
     }
 }
 
-export default connect(null, { completeTask })(TaskItem)
+export default connect(null, { completeTask, hideTask, hideTaskWeek, hideTaskMonth, hideTaskYear })(TaskItem)

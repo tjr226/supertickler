@@ -13,11 +13,14 @@ class SuperTickler extends React.Component {
     render() {
   
         const listToShow = this.props.potentialTaskList;
-        const sortedListToShow = listToShow.sort((a,b) => 
+        const filteredListToShow = listToShow
+            .filter(task => task.hidden_boolean === 0)
+            .filter(task => task.completed_boolean === 0);
+        const sortedListToShow = filteredListToShow.sort((a,b) => 
             a.unix_timestamp - b.unix_timestamp
-        )
+        );
 
-        console.log(sortedListToShow);
+        // console.log(sortedListToShow);
 
         return (
             <div>

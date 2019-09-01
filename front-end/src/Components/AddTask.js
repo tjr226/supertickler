@@ -10,15 +10,13 @@ const AddTaskDiv = styled.div`
 class AddTask extends React.Component {
     state = {
         task_text: "",
-        days_to_push: ""
     }
 
     addTask = e => {
         e.preventDefault();
         this.props.addTask(this.state)
         this.setState({
-            task_text: "",
-            days_to_push: ""
+            task_text: ""
         })
     };
 
@@ -37,14 +35,6 @@ class AddTask extends React.Component {
                             onChange={this.handleChanges}
                             value={this.state.task_text}
                             name="task_text"
-                        />
-                        <input
-                            type="number"
-                            className="form-control"
-                            placeholder="Days to push"
-                            onChange={this.handleChanges}
-                            value={this.state.days_to_push}
-                            name="days_to_push"
                         />
                         <button className="btn btn-primary">
                             Add Task

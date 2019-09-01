@@ -14,7 +14,7 @@ class Header extends React.Component {
         return (
             <HeaderDiv>
                 <h2>SuperTickler</h2>
-                <button className="btn btn-primary">Log Out</button>
+                {/* <button className="btn btn-primary">Log Out</button> */}
             </HeaderDiv>
         )
     }
