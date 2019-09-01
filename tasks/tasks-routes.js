@@ -3,6 +3,9 @@ const Tasks = require('./tasks-model.js');
 const middleware = require('../middleware/middleware.js');
 const moment = require('moment');
 
+const idRouter = require('./task-id-routes.js');
+router.use('/', idRouter);
+
 // default is to get all for user
 router.get('/', (req, res) => {
     const user_id = req.user.user_id;
@@ -20,6 +23,8 @@ router.get('/', (req, res) => {
 
 router.post('/', middleware.validateTask, (req, res) => {
     let taskInfo = {}
+    // initially coded to allow setting the amount of days_to_push when you create the initial POST request
+    // modified to only allow pushing by month or year, and only when tasks are in the main list
     if (req.body.days_to_push === undefined) {
         taskInfo = {
             ...req.body,
@@ -54,69 +59,6 @@ router.post('/', middleware.validateTask, (req, res) => {
         })
 
 })
-
-router.put('/:id/hide', middleware.validateTaskId, (req, res) => {
-    const { id } = req.params;
-    const changes = { hidden_boolean: 1 };
-
-    Tasks.update(changes, id)
-        .then(response => {
-            res.status(204).json(response);
-        })
-        .catch(error => {
-            res.status(500).json({ errorMessage: "The task could not be hidden." });
-        })
-})
-
-router.put('/:id/complete', middleware.validateTaskId, (req, res) => {
-    const { id } = req.params;
-    const changes = { completed_boolean: 1 };
-
-    Tasks.update(changes, id)
-        .then(response => {
-            res.status(204).json(response);
-        })
-        .catch(error => {
-            res.status(500).json({ errorMessage: "The task could not be marked as complete." });
-        })
-})
-
-router.put('/:id/uncomplete', middleware.validateTaskId, (req, res) => {
-    const { id } = req.params;
-    const changes = { completed_boolean: 0 };
-
-    Tasks.update(changes, id)
-        .then(response => {
-            res.status(204).json(response);
-        })
-        .catch(error => {
-            res.status(500).json({ errorMessage: "The task could not be marked as incomplete." });
-        })
-})
-
-router.put('/:id/push',
-    middleware.validateTaskId,
-    middleware.validateDaysToPush,
-    async (req, res) => {
-        const { id } = req.params;
-        const new_unix_timestamp =
-            moment()
-                .add(req.body.days_to_push, 'days')
-                .format('x');
-        changes = {
-            unix_timestamp: new_unix_timestamp,
-            hidden_boolean: 1
-        };
-
-        Tasks.update(changes, id)
-            .then(response => {
-                res.status(204).json(response);
-            })
-            .catch(error => {
-                res.status(500).json({ errorMessage: "The task could not be pushed." });
-            })
-
-    })
 
 router.put('/hide_all', (req, res) => {
     const user_id = req.user.user_id;
