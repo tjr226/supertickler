@@ -65,6 +65,29 @@ router.put('/:id/push',
             })
     })
 
+router.put('/:id/pushWeek',
+    middleware.validateTaskId,
+    async (req, res) => {
+        const { id } = req.params;
+        const new_unix_timestamp =
+            moment()
+                .add(7, 'days')
+                .format('x');
+        changes = {
+            unix_timestamp: new_unix_timestamp,
+            hidden_boolean: 1
+        };
+
+        Tasks.update(changes, id)
+            .then(response => {
+                res.status(204).json(response);
+            })
+            .catch(error => {
+                res.status(500).json({ errorMessage: "The task could not be pushed by a week." });
+            })
+    })
+
+
 router.put('/:id/pushMonth',
     middleware.validateTaskId,
     async (req, res) => {
