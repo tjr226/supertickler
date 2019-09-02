@@ -9,13 +9,12 @@ const HeaderDiv = styled.div`
     `
 
 class Header extends React.Component {
-    // placeholder - Logout function
+
 
     render() {
         return (
             <HeaderDiv>
                 <h2>SuperTickler</h2>
-                {/* <button className="btn btn-primary">Log Out</button> */}
             </HeaderDiv>
         )
     }

@@ -12,8 +12,6 @@ export const SHOW_ALL_TASKS = "SHOW_ALL_TASKS";
 export const SHOW_NEXT_20 = "SHOW_NEXT_20";
 
 export const addTask = addTaskObject => {
-    // console.log(addTaskObject);
-    // console.log("in AddTask bit of actions");
     return {
         type: ADD_TASK,
         payload: addTaskObject
@@ -21,7 +19,6 @@ export const addTask = addTaskObject => {
 }
 
 export const completeTask = taskID => {
-    // console.log(taskID, "is completed");
     return {
         type: COMPLETE_TASK,
         payload: taskID
@@ -29,7 +26,6 @@ export const completeTask = taskID => {
 }
 
 export const hideTask = hideTaskPayload => {
-    // console.log(hideTaskPayload, "is pushed");
     return {
         type: HIDE_TASK,
         payload: hideTaskPayload
@@ -58,21 +54,18 @@ export const hideTaskYear = taskID => {
 }
 
 export const hideAllTasks = hideAllTasksPayload => {
-    // console.log("hiding all tasks");
     return {
         type: HIDE_ALL_TASKS
     }
 }
 
 export const showAllTasks = showAllTasksPayload => {
-    // console.log("showing all tasks");
     return {
         type: SHOW_ALL_TASKS
     }
 }
 
 export const showNext20 = showNext20Payload => {
-    // console.log("showing next 20");
     return {
         type: SHOW_NEXT_20
     }

@@ -75,9 +75,9 @@ class TaskItem extends React.Component {
                 </AllTextDiv>
                 <AllButtonsDiv>
                     <HideButtonsDiv>
-                        <button onClick={this.hideTaskWeek} className="btn btn-secondary">Hide 1 Week</button>
-                        <button onClick={this.hideTaskMonth} className="btn btn-secondary">Hide 1 Month</button>
-                        <button onClick={this.hideTaskYear} className="btn btn-secondary">Hide 1 Year</button>
+                        <button onClick={this.hideTaskWeek} className="btn btn-secondary">Hide Week</button>
+                        <button onClick={this.hideTaskMonth} className="btn btn-secondary">Hide Month</button>
+                        <button onClick={this.hideTaskYear} className="btn btn-secondary">Hide Year</button>
                     </HideButtonsDiv>
 
                     <button onClick={this.completeTask} className="btn btn-secondary">Complete</button>

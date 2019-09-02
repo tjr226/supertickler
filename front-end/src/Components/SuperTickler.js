@@ -4,7 +4,6 @@ import TaskItem from './TaskItem';
 import Header from './Header';
 
 import styled from 'styled-components';
-import moment from 'moment';
 
 import TopSection from './TopSection';
 import TaskColumnLabels from './TaskColumnLabels';
@@ -23,13 +22,10 @@ class SuperTickler extends React.Component {
             a.unix_timestamp - b.unix_timestamp
         );
 
-        // console.log(sortedListToShow);
-
         return (
             <SuperTicklerDiv>
                 <Header />
                 <TopSection />
-                {/* <h3>Tasks</h3> */}
                 <TaskColumnLabels />
                 {sortedListToShow.map(task => <TaskItem key={task.id} task={task} />)}
             </SuperTicklerDiv>
