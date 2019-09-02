@@ -7,8 +7,28 @@ import styled from 'styled-components';
 const TaskDiv = styled.div`
     display:flex;
     flex-direction:row;
-    width:80%;
+    width:100%;
     justify-content:space-between;
+    `
+
+const AllButtonsDiv = styled.div`
+    display:flex;
+    flex-direction:row;
+    max-height: 40px;
+    `
+const HideButtonsDiv = styled.div`
+    padding-right: 20px;
+    `
+
+const AllTextDiv = styled.div`
+    display:flex;
+    flex-direction:row;
+    width: 60%;
+    `
+
+const TaskTextDiv = styled.div`
+    width: 80%;
+    padding-right:10px;
     `
 
 class TaskItem extends React.Component {
@@ -47,12 +67,21 @@ class TaskItem extends React.Component {
     render() {
         return (
             <TaskDiv>
-                <p>{this.props.task.task_text}</p>
-                <p>{moment.unix(this.props.task.unix_timestamp/1000).format('LL')}</p>
-                <button onClick={this.hideTaskWeek} className="btn btn-secondary">Hide 1 Week</button>
-                <button onClick={this.hideTaskMonth} className="btn btn-secondary">Hide 1 Month</button>
-                <button onClick={this.hideTaskYear} className="btn btn-secondary">Hide 1 Year</button>
-                <button onClick={this.completeTask} className="btn btn-secondary">Complete</button>
+                <AllTextDiv>
+                    <TaskTextDiv>
+                        <p>{this.props.task.task_text}</p>
+                    </TaskTextDiv>
+                    <p>{moment.unix(this.props.task.unix_timestamp / 1000).format('LL')}</p>
+                </AllTextDiv>
+                <AllButtonsDiv>
+                    <HideButtonsDiv>
+                        <button onClick={this.hideTaskWeek} className="btn btn-secondary">Hide 1 Week</button>
+                        <button onClick={this.hideTaskMonth} className="btn btn-secondary">Hide 1 Month</button>
+                        <button onClick={this.hideTaskYear} className="btn btn-secondary">Hide 1 Year</button>
+                    </HideButtonsDiv>
+
+                    <button onClick={this.completeTask} className="btn btn-secondary">Complete</button>
+                </AllButtonsDiv>
             </TaskDiv>
         )
     }

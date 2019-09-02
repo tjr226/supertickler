@@ -9,6 +9,9 @@ import moment from 'moment';
 import TopSection from './TopSection';
 import TaskColumnLabels from './TaskColumnLabels';
 
+const SuperTicklerDiv = styled.div`
+    padding: 10px 20px;
+`
 class SuperTickler extends React.Component {
     render() {
   
@@ -23,13 +26,13 @@ class SuperTickler extends React.Component {
         // console.log(sortedListToShow);
 
         return (
-            <div>
+            <SuperTicklerDiv>
                 <Header />
                 <TopSection />
-                <h3>Tasks</h3>
-                {/* <TaskColumnLabels /> */}
+                {/* <h3>Tasks</h3> */}
+                <TaskColumnLabels />
                 {sortedListToShow.map(task => <TaskItem key={task.id} task={task} />)}
-            </div>
+            </SuperTicklerDiv>
         )
     }
 };

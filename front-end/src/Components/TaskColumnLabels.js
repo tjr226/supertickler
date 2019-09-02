@@ -5,17 +5,14 @@ const TaskColumnLabelsDiv = styled.div`
     display:flex;
     flex-direction:row;
     justify-content:space-between;
-    width:80%;
+    padding: 10px 0px 20px 0px;
 `
 
 class TaskColumnLabels extends React.Component {
     render() {
         return (
             <TaskColumnLabelsDiv>
-                <h4>Task</h4>
-                <h4>Date</h4>
-                <h4>Hide Task</h4>
-                <h4>Complete</h4>
+                <h3>Tasks</h3>
             </TaskColumnLabelsDiv>
         )
     }
