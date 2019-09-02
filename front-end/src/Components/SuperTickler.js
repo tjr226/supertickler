@@ -26,7 +26,8 @@ class SuperTickler extends React.Component {
             <div>
                 <Header />
                 <TopSection />
-                <TaskColumnLabels />
+                <h3>Tasks</h3>
+                {/* <TaskColumnLabels /> */}
                 {sortedListToShow.map(task => <TaskItem key={task.id} task={task} />)}
             </div>
         )

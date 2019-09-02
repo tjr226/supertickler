@@ -1,10 +1,10 @@
-import { ADD_TASK, COMPLETE_TASK, HIDE_TASK, HIDE_TASK_WEEK, HIDE_TASK_MONTH, HIDE_TASK_YEAR, HIDE_ALL_TASKS, SHOW_ALL_TASKS } from '../Actions';
+import { ADD_TASK, COMPLETE_TASK, HIDE_TASK, HIDE_TASK_WEEK, HIDE_TASK_MONTH, HIDE_TASK_YEAR, HIDE_ALL_TASKS, SHOW_ALL_TASKS, SHOW_NEXT_20 } from '../Actions';
 import moment from 'moment';
 
 const initialState = {
     potentialTaskList: [
         { task_text: "Task One", id: 0, completed_boolean: 0, hidden_boolean: 0, unix_timestamp: moment().format('x') },
-        { task_text: "TaskTwo", id: 1, completed_boolean: 0, hidden_boolean: 0, unix_timestamp: moment().add(1, 'days').format('x') }
+        { task_text: "TaskTwo", id: 1, completed_boolean: 0, hidden_boolean: 0, unix_timestamp: moment().add(1, 'days').format('x') },
     ],
     nextID: 2
 }
@@ -71,15 +71,35 @@ export const taskreducer = (state = initialState, action) => {
         case HIDE_ALL_TASKS:
             return {
                 ...state,
-                potentialTaskList: state.potentialTaskList.map(task => 1 === 1 ?
-                    { ...task, hidden_boolean: 1 } : task)
+                potentialTaskList: state.potentialTaskList.map(function (task) {
+                    return { ...task, hidden_boolean: 1 }
+                })
             };
+
         case SHOW_ALL_TASKS:
             return {
                 ...state,
-                potentialTaskList: state.potentialTaskList.map(task => 1 === 1 ?
-                    { ...task, hidden_boolean: 0 } : task)
-            };
+                potentialTaskList: state.potentialTaskList.map(function (task) {
+                    return { ...task, hidden_boolean: 0 };
+                })
+            }
+        case SHOW_NEXT_20:
+            const sortedTaskList = state.potentialTaskList.sort((a, b) =>
+                a.unix_timestamp - b.unix_timestamp
+            );
+
+            const showNext20Array = sortedTaskList.map(function (task, index) {
+                if (index < 20) {
+                    return { ...task, hidden_boolean: 0 };
+                } else {
+                    return { ...task, hidden_boolean: 1 };
+                }
+            })
+
+            return {
+                ...state,
+                potentialTaskList: showNext20Array
+            }
         default:
             return state;
     }

@@ -1,11 +1,15 @@
 export const ADD_TASK = "ADD_TASK";
 export const COMPLETE_TASK = "COMPLETE_TASK";
+
 export const HIDE_TASK = "HIDE_TASK";
 export const HIDE_TASK_WEEK = "HIDE_TASK_WEEK";
 export const HIDE_TASK_MONTH = "HIDE_TASK_MONTH";
 export const HIDE_TASK_YEAR = "HIDE_TASK_YEAR";
+
 export const HIDE_ALL_TASKS = "HIDE_ALL_TASKS";
 export const SHOW_ALL_TASKS = "SHOW_ALL_TASKS";
+
+export const SHOW_NEXT_20 = "SHOW_NEXT_20";
 
 export const addTask = addTaskObject => {
     // console.log(addTaskObject);
@@ -25,7 +29,7 @@ export const completeTask = taskID => {
 }
 
 export const hideTask = hideTaskPayload => {
-    console.log(hideTaskPayload, "is pushed");
+    // console.log(hideTaskPayload, "is pushed");
     return {
         type: HIDE_TASK,
         payload: hideTaskPayload
@@ -54,17 +58,22 @@ export const hideTaskYear = taskID => {
 }
 
 export const hideAllTasks = hideAllTasksPayload => {
-    console.log("hiding all tasks");
+    // console.log("hiding all tasks");
     return {
-        type: HIDE_ALL_TASKS,
-        payload: hideAllTasksPayload
+        type: HIDE_ALL_TASKS
     }
 }
 
 export const showAllTasks = showAllTasksPayload => {
-    console.log("showing all tasks");
+    // console.log("showing all tasks");
     return {
-        type: SHOW_ALL_TASKS,
-        payload: showAllTasksPayload
+        type: SHOW_ALL_TASKS
+    }
+}
+
+export const showNext20 = showNext20Payload => {
+    // console.log("showing next 20");
+    return {
+        type: SHOW_NEXT_20
     }
 }
