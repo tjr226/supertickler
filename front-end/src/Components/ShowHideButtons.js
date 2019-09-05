@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { hideAllTasks, showAllTasks, showNext20 } from '../Actions';
+// hideAllTasks, showAllTasks, showNext20 are not from "auth" portion
+import { hideAllTasks, showAllTasks, showNext20,
+    hideAllAuth, showAllAuth,
+} from '../Actions';
 
 const ShowHideButtonsDiv = styled.div`
     display:flex;
@@ -14,9 +17,19 @@ class ShowHideButtons extends React.Component {
         this.props.hideAllTasks();
     }
 
+    hideAllAuth = e => {
+        e.preventDefault();
+        this.props.hideAllAuth();
+    }
+
     showAllTasks = e => {
         e.preventDefault();
         this.props.showAllTasks();
+    }
+
+    showAllAuth = e => {
+        e.preventDefault();
+        this.props.showAllAuth();
     }
 
     showNext20 = e => {
@@ -28,11 +41,14 @@ class ShowHideButtons extends React.Component {
         return (
             <ShowHideButtonsDiv>
                 <button onClick={this.showNext20} className="btn btn-secondary">Show Next 20</button>
-                <button onClick={this.showAllTasks} className="btn btn-secondary">Show All</button>
-                <button onClick={this.hideAllTasks} className="btn btn-secondary">Hide All</button>
+                <button onClick={this.showAllAuth} className="btn btn-secondary">Show All</button>
+                <button onClick={this.hideAllAuth} className="btn btn-secondary">Hide All</button>
             </ShowHideButtonsDiv>
         )
     }
 }
 
-export default connect(null, { hideAllTasks, showAllTasks, showNext20 })(ShowHideButtons);
+export default connect(null, { 
+    hideAllTasks, showAllTasks, showNext20,
+    hideAllAuth, showAllAuth,
+})(ShowHideButtons);

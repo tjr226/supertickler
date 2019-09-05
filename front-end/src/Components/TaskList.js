@@ -1,12 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
+import { getData } from '../Actions';
 import TaskColumnLabels from './TaskColumnLabels';
 import TaskItem from './TaskItem';
 
 
 class TaskList extends React.Component {
+    componentDidMount() {
+        this.props.getData();
+    }
+
     render() {
-        const listToShow = this.props.potentialTaskList;
+        console.log("this props fetchedTaskList", this.props.fetchedTaskList);
+        console.log(this.props);
+        const listToShow = this.props.fetchedTaskList;
         const filteredListToShow = listToShow
             .filter(task => task.hidden_boolean === 0)
             .filter(task => task.completed_boolean === 0);
@@ -25,8 +33,11 @@ class TaskList extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        potentialTaskList: state.taskreducer.potentialTaskList,
+        fetchedTaskList: state.authreducer.fetchedTaskList,
     };
 };
 
-export default connect(mapStateToProps, null)(TaskList)
+export default connect(
+    mapStateToProps,
+    { getData }
+)(TaskList)

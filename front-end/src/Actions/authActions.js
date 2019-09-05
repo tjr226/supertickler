@@ -45,6 +45,7 @@ export const FETCH_TASKS_SUCCESS = 'FETCH_TASKS_SUCCESS';
 export const FETCH_TASKS_FAILURE = 'FETCH_FRIENDS_FAILURE';
 
 export const getData = creds => dispatch => {
+    console.log("getData happening");
     dispatch({ type: FETCH_TASKS_START })
     axiosWithAuth().get('http://localhost:5000/api/tasks')
         .then(res => {
@@ -53,5 +54,37 @@ export const getData = creds => dispatch => {
         .catch(err => {
             console.log(err);
             dispatch({ type: FETCH_TASKS_FAILURE });
+        })
+}
+
+export const HIDE_ALL_START = 'HIDE_ALL_START';
+export const HIDE_ALL_SUCCESS = 'HIDE_ALL_SUCCESS';
+export const HIDE_ALL_FAILURE = 'HIDE_ALL_FAILURE';
+
+export const hideAllAuth = creds => dispatch => {
+    console.log("hiding all, authAction start");
+    dispatch({ type: HIDE_ALL_START });
+    axiosWithAuth().put('http://localhost:5000/api/tasks/hide_all')
+        .then(res => {
+            console.log(res);
+            dispatch({ type: HIDE_ALL_SUCCESS })
+        })
+        .catch(err => {
+            dispatch({ type: HIDE_ALL_FAILURE, payload: err })
+        })
+}
+
+export const SHOW_ALL_START = 'SHOW_ALL_START';
+export const SHOW_ALL_SUCCESS = 'SHOW_ALL_SUCCESS'; 
+export const SHOW_ALL_FAILURE = 'SHOW_ALL_FAILURE';
+
+export const showAllAuth = creds => dispatch => {
+    dispatch({ type: SHOW_ALL_START });
+    axiosWithAuth().put('http://localhost:5000/api/tasks/unhide_all')
+        .then(res => {
+            dispatch({ type: SHOW_ALL_SUCCESS })
+        })
+        .catch(err => {
+            dispatch({ type: SHOW_ALL_FAILURE, payload: err })
         })
 }

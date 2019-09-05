@@ -61,9 +61,12 @@ router.post('/', middleware.validateTask, (req, res) => {
 })
 
 router.put('/hide_all', (req, res) => {
+    console.log("task routes HIDE ALL running");
     const user_id = req.user.user_id;
+    console.log("user id is", user_id);
     Tasks.hideAllForUser(user_id)
         .then(response => {
+            console.log("hide all backend response is", response);
             res.status(204).json(response);
         })
         .catch(error => {
