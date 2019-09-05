@@ -8,15 +8,18 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 
 function App() {
-  
+
   return (
     // <div>
     //   <SuperTickler />
     // </div>
     <Router>
+      <Link to="/login">Login</Link>
+      <br></br>
+      <Link to="/signup">Sign Up</Link>
       <Route exact path="/" component={Login} />
       <Route exact path="/login" component={Login} />
-      {/* <Route exact path="/signup" component={Signup} /> */}
+      <Route exact path="/signup" component={Signup} />
       <PrivateRoute exact path="/supertickler" component={SuperTickler} />
     </Router>
   );
