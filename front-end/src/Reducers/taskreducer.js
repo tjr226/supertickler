@@ -1,7 +1,12 @@
-import { ADD_TASK, COMPLETE_TASK, HIDE_TASK, HIDE_TASK_WEEK, HIDE_TASK_MONTH, HIDE_TASK_YEAR, HIDE_ALL_TASKS, SHOW_ALL_TASKS, SHOW_NEXT_20 } from '../Actions/index.js';
+import { 
+    ADD_TASK, COMPLETE_TASK, HIDE_TASK, 
+    HIDE_TASK_WEEK, HIDE_TASK_MONTH, HIDE_TASK_YEAR, 
+    HIDE_ALL_TASKS, SHOW_ALL_TASKS, SHOW_NEXT_20 
+} from '../Actions/index.js';
+
 import moment from 'moment';
 
-const initialState = {
+const initialTaskState = {
     potentialTaskList: [
         { task_text: "Task One", id: 0, completed_boolean: 0, hidden_boolean: 0, unix_timestamp: moment().format('x') },
         { task_text: "TaskTwo", id: 1, completed_boolean: 0, hidden_boolean: 0, unix_timestamp: moment().add(1, 'days').format('x') },
@@ -9,7 +14,7 @@ const initialState = {
     nextID: 2
 }
 
-export const taskreducer = (state = initialState, action) => {
+export const taskreducer = (state = initialTaskState, action) => {
 
     switch (action.type) {
         case ADD_TASK:
