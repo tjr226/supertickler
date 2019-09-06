@@ -61,13 +61,13 @@ router.post('/', middleware.validateTask, (req, res) => {
 })
 
 router.put('/hide_all', (req, res) => {
-    console.log("task routes HIDE ALL running");
+    // console.log("task routes HIDE ALL running");
     const user_id = req.user.user_id;
-    console.log("user id is", user_id);
+    // console.log("user id is", user_id);
     Tasks.hideAllForUser(user_id)
         .then(response => {
-            console.log("hide all backend response is", response);
-            res.status(204).json(response);
+            // console.log("hide all backend response is", response);
+            res.status(200).json(response);
         })
         .catch(error => {
             res.status(500).json({ errorMessage: "Failed to hide all tasks." });
@@ -78,7 +78,8 @@ router.put('/unhide_all', (req, res) => {
     const user_id = req.user.user_id;
     Tasks.unhideAllForUser(user_id)
         .then(response => {
-            res.status(204).json(response);
+            // console.log("unhide all response in Task Router", response);
+            res.status(200).json(response);
         })
         .catch(error => {
             res.status(500).json({ errorMessage: "Failed to unhide all tasks." });

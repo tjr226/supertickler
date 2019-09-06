@@ -58,15 +58,15 @@ export const authreducer = (state = initialAuthState, action) => {
                 token: '',
             }
         case FETCH_TASKS_START:
-            console.log("fetching tasks payload", action.payload)
+            // console.log("fetching tasks payload", action.payload)
             return {
                 ...state,
                 fetchingTasks: true,
                 error: ''
             }
         case FETCH_TASKS_SUCCESS:
-            console.log("fetching tasks success");
-            console.log("fetching tasks payload", action.payload)
+            // console.log("fetching tasks success");
+            // console.log("fetching tasks payload", action.payload)
             return {
                 ...state,
                 fetchingTasks: false,
@@ -88,7 +88,8 @@ export const authreducer = (state = initialAuthState, action) => {
         case HIDE_ALL_SUCCESS:
             return {
                 ...state,
-                hidingAll: false
+                hidingAll: false,
+                fetchedTaskList: action.payload,
             }
         case HIDE_ALL_FAILURE:
             return {
@@ -104,7 +105,8 @@ export const authreducer = (state = initialAuthState, action) => {
         case SHOW_ALL_SUCCESS:
             return {
                 ...state,
-                showingAll: false
+                showingAll: false,
+                fetchedTaskList: action.payload,
             }
         case SHOW_ALL_FAILURE:
             return {

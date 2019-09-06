@@ -37,16 +37,20 @@ function update(changes, id) {
         .update(changes)
 }
 
-function hideAllForUser(user_id) {
-    return db('tasks')
+
+
+async function hideAllForUser(user_id) {
+    await db('tasks')
         .where('user_id', user_id)
-        .update({ hidden_boolean: 1 })
+        .update({ hidden_boolean: 1});
+    return findByUserId(user_id);
 }
 
-function unhideAllForUser(user_id) {
-    return db('tasks')
+async function unhideAllForUser(user_id) {
+    await db('tasks')
         .where('user_id', user_id)
-        .update({ hidden_boolean: 0 })
+        .update({ hidden_boolean: 0 });
+    return findByUserId(user_id);
 }
 
 function remove(id) {

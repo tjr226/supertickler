@@ -12,8 +12,8 @@ class TaskList extends React.Component {
     }
 
     render() {
-        console.log("this props fetchedTaskList", this.props.fetchedTaskList);
-        console.log(this.props);
+        // console.log("this props fetchedTaskList", this.props.fetchedTaskList);
+        // console.log(this.props);
         const listToShow = this.props.fetchedTaskList;
         const filteredListToShow = listToShow
             .filter(task => task.hidden_boolean === 0)
