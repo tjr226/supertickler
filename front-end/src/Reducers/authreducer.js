@@ -6,6 +6,7 @@ import {
     SHOW_ALL_START, SHOW_ALL_SUCCESS, SHOW_ALL_FAILURE, 
     SHOW_20_START, SHOW_20_SUCCESS, SHOW_20_FAILURE,
     CREATE_TASK_START, CREATE_TASK_SUCCESS, CREATE_TASK_FAILURE,
+    COMPLETE_TASK_START, COMPLETE_TASK_SUCCESS, COMPLETE_TASK_FAILURE,
 } from '../Actions/index.js';
 
 const initialAuthState = {
@@ -16,6 +17,7 @@ const initialAuthState = {
     showingAll: false,
     showing20: false,
     creatingTask: false,
+    completingTask: false,
     fetchedTaskList: [],
     token: '',
     error: null,
@@ -153,6 +155,24 @@ export const authreducer = (state = initialAuthState, action) => {
                 ...state,
                 creatingTask: false,
                 error: ''
+            }
+        case COMPLETE_TASK_START:
+            return {
+                ...state,
+                completingTask: true,
+                error: ''
+            }
+        case COMPLETE_TASK_SUCCESS:
+            return {
+                ...state,
+                completingTask: false,
+                fetchedTaskList: action.payload
+            }
+        case COMPLETE_TASK_FAILURE:
+            return {
+                ...state,
+                completingTask: false,
+                error: action.payload
             }
         default:
             return state;

@@ -36,10 +36,15 @@ function findByUserId(user_id) {
         .orderBy('unix_timestamp', 'asc')
 }
 
-function update(changes, id) {
-    return db('tasks')
+async function update(changes, id, user_id) {
+    await db('tasks')
         .where({ id })
         .update(changes)
+    return db('tasks')
+        .where('user_id', user_id)
+        .where('hidden_boolean', 0)
+        .where('completed_boolean', 0)
+        .orderBy('unix_timestamp', 'asc')
 }
 
 // this calls unhideAllForUser because the goal of showing next 20 is to see the next 20, including hidden ones

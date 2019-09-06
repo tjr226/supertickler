@@ -126,3 +126,18 @@ export const createTaskAuth = form_input => dispatch => {
             dispatch({ type: CREATE_TASK_FAILURE, payload: err })
         })
 }
+
+export const COMPLETE_TASK_START = 'COMPLETE_TASK_START';
+export const COMPLETE_TASK_SUCCESS = 'COMPLETE_TASK_SUCCESS';
+export const COMPLETE_TASK_FAILURE = 'COMPLETE_TASK_FAILURE';
+
+export const completeTask = task_id => dispatch => {
+    dispatch({ type: COMPLETE_TASK_START });
+    axiosWithAuth().put(`http://localhost:5000/api/tasks/${task_id}/complete`)
+        .then(res => {
+            dispatch({ type: COMPLETE_TASK_SUCCESS, payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: COMPLETE_TASK_FAILURE, payload: err })
+        })
+}

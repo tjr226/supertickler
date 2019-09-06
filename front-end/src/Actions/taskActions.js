@@ -1,5 +1,5 @@
 export const ADD_TASK = "ADD_TASK";
-export const COMPLETE_TASK = "COMPLETE_TASK";
+// export const COMPLETE_TASK = "COMPLETE_TASK";
 
 export const HIDE_TASK = "HIDE_TASK";
 export const HIDE_TASK_WEEK = "HIDE_TASK_WEEK";
@@ -18,12 +18,12 @@ export const addTask = addTaskObject => {
     }
 }
 
-export const completeTask = taskID => {
-    return {
-        type: COMPLETE_TASK,
-        payload: taskID
-    }
-}
+// export const completeTask = taskID => {
+//     return {
+//         type: COMPLETE_TASK,
+//         payload: taskID
+//     }
+// }
 
 export const hideTask = hideTaskPayload => {
     return {

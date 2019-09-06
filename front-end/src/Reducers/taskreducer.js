@@ -1,5 +1,5 @@
 import { 
-    ADD_TASK, COMPLETE_TASK, HIDE_TASK, 
+    ADD_TASK, HIDE_TASK, 
     HIDE_TASK_WEEK, HIDE_TASK_MONTH, HIDE_TASK_YEAR, 
     HIDE_ALL_TASKS, SHOW_ALL_TASKS, SHOW_NEXT_20 
 } from '../Actions/index.js';
@@ -28,12 +28,12 @@ export const taskreducer = (state = initialTaskState, action) => {
                 }],
                 nextID: state.nextID + 1
             }
-        case COMPLETE_TASK:
-            return {
-                ...state,
-                potentialTaskList: state.potentialTaskList.map(task => task.id === action.payload ?
-                    { ...task, completed_boolean: 1 } : task)
-            };
+        // case COMPLETE_TASK:
+        //     return {
+        //         ...state,
+        //         potentialTaskList: state.potentialTaskList.map(task => task.id === action.payload ?
+        //             { ...task, completed_boolean: 1 } : task)
+        //     };
         case HIDE_TASK:
             return {
                 ...state,

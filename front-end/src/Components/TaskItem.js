@@ -43,11 +43,6 @@ class TaskItem extends React.Component {
         this.props.completeTask(this.props.task.id);
     }
 
-    hideTask = e => {
-        e.preventDefault();
-        this.props.hideTask(this.props.task.id);
-    }
-
     hideTaskWeek = e => {
         e.preventDefault();
         this.props.hideTaskWeek(this.props.task.id);
