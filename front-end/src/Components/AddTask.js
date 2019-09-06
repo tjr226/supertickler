@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTask } from '../Actions'
+import { addTask, createTaskAuth } from '../Actions'
 import styled from 'styled-components';
 
 const AddTaskDiv = styled.div`
@@ -20,13 +20,21 @@ class AddTask extends React.Component {
         })
     };
 
+    createTaskAuth = e => {
+        e.preventDefault();
+        this.props.createTaskAuth(this.state.task_text)
+        this.setState({
+            task_text: ""
+        })
+    }
+
     handleChanges = e => this.setState({ [e.target.name]: e.target.value });
 
     render() {
 
         return (
             <AddTaskDiv>
-                <form onSubmit={this.addTask}>
+                <form onSubmit={this.createTaskAuth}>
                     <div className="form-group">
                         <textarea
                             rows="5"
@@ -37,7 +45,7 @@ class AddTask extends React.Component {
                             name="task_text"
                         />
                         <button className="btn btn-primary">
-                            Add Task
+                            Create Task
                         </button>
                     </div>
                 </form>
@@ -46,10 +54,4 @@ class AddTask extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        potentialTaskList: state.taskreducer.potentialTaskList,
-    };
-};
-
-export default connect(mapStateToProps, { addTask })(AddTask);
+export default connect(null, { addTask, createTaskAuth })(AddTask);

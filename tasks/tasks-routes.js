@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     Tasks.findByUserId(user_id)
         .then(tasks => {
             // tasks.forEach(function(task) {
-                // console.log(moment(task.unix_timestamp).format())
+            // console.log(moment(task.unix_timestamp).format())
             // })
             res.status(200).json(tasks);
         })
@@ -21,37 +21,48 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/get_twenty', (req, res) => {
+    const user_id = req.user.user_id;
+    Tasks.findByUserId20(user_id)
+        .then(tasks => {
+            res.status(200).json(tasks);
+        })
+        .catch(error => {
+            res.status(500).json({ errorMessage: "Could not get next 20 tasks." })
+        })
+})
+
 router.post('/', middleware.validateTask, (req, res) => {
     let taskInfo = {}
     // initially coded to allow setting the amount of days_to_push when you create the initial POST request
     // modified to only allow pushing by month or year, and only when tasks are in the main list
-    if (req.body.days_to_push === undefined) {
-        taskInfo = {
-            ...req.body,
-            user_id: req.user.user_id,
-            hidden_boolean: 0,
-            completed_boolean: 0,
-            unix_timestamp: moment().format('x')
-        };
-    } else {
-        const bodyInfo = req.body;
-        const new_unix_timestamp =
-            moment()
-                .add(req.body.days_to_push, 'days')
-                .format('x');
-        delete bodyInfo.days_to_push;
-        taskInfo = {
-            ...bodyInfo,
-            user_id: req.user.user_id,
-            hidden_boolean: 1,
-            completed_boolean: 0,
-            unix_timestamp: new_unix_timestamp
-        }
-    }
+    // if (req.body.days_to_push === undefined) {
+    taskInfo = {
+        ...req.body,
+        user_id: req.user.user_id,
+        hidden_boolean: 0,
+        completed_boolean: 0,
+        unix_timestamp: moment().format('x')
+    };
+    // } else {
+    //     const bodyInfo = req.body;
+    //     const new_unix_timestamp =
+    //         moment()
+    //             .add(req.body.days_to_push, 'days')
+    //             .format('x');
+    //     delete bodyInfo.days_to_push;
+    //     taskInfo = {
+    //         ...bodyInfo,
+    //         user_id: req.user.user_id,
+    //         hidden_boolean: 1,
+    //         completed_boolean: 0,
+    //         unix_timestamp: new_unix_timestamp
+    //     }
+    // }
 
     Tasks.add(taskInfo)
-        .then(task => {
-            res.status(201).json(task);
+        .then(response => {
+            res.status(201).json(response);
         })
         .catch(error => {
             console.log(error);

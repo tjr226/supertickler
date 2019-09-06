@@ -79,6 +79,7 @@ export const SHOW_ALL_SUCCESS = 'SHOW_ALL_SUCCESS';
 export const SHOW_ALL_FAILURE = 'SHOW_ALL_FAILURE';
 
 export const showAllAuth = creds => dispatch => {
+    // console.log("show all creds", creds);
     dispatch({ type: SHOW_ALL_START });
     axiosWithAuth().put('http://localhost:5000/api/tasks/unhide_all')
         .then(res => {
@@ -88,5 +89,40 @@ export const showAllAuth = creds => dispatch => {
         })
         .catch(err => {
             dispatch({ type: SHOW_ALL_FAILURE, payload: err })
+        })
+}
+
+export const SHOW_20_START = 'SHOW_20_START';
+export const SHOW_20_SUCCESS = 'SHOW_20_SUCCESS';
+export const SHOW_20_FAILURE = 'SHOW_20_FAILURE';
+
+export const show20Auth = creds => dispatch => {
+    dispatch({ type: SHOW_20_START });
+    axiosWithAuth().get('http://localhost:5000/api/tasks/get_twenty')
+        .then(res => {
+            dispatch({ type: SHOW_20_SUCCESS, payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: SHOW_20_FAILURE, payload: err })
+        })
+}
+
+export const CREATE_TASK_START = 'CREATE_TASK_START';
+export const CREATE_TASK_SUCCESS = 'CREATE_TASK_SUCCESS';
+export const CREATE_TASK_FAILURE = 'CREATE_TASK_FAILURE';
+
+export const createTaskAuth = form_input => dispatch => {
+    // console.log("task text is", task_text);
+    // console.log("creds are", creds);
+    console.log("form input is", form_input);
+    console.log("in create task auth action");
+    const task_text = { task_text: form_input }
+    dispatch({ type: CREATE_TASK_START });
+    axiosWithAuth().post('http://localhost:5000/api/tasks/', task_text)
+        .then(res => {
+            dispatch({ type: CREATE_TASK_SUCCESS, payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: CREATE_TASK_FAILURE, payload: err })
         })
 }

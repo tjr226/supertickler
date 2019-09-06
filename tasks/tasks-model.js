@@ -5,6 +5,7 @@ module.exports = {
     find,
     findById,
     findByUserId,
+    findByUserId20,
     update,
     remove,
     hideAllForUser,
@@ -16,10 +17,11 @@ function find() {
 }
 
 async function add(task) {
-    const [id] = await db('tasks').insert(task);
-    return findById(id);
+    await db('tasks').insert(task);
+    return findByUserId(task.user_id);
 }
 
+// this is find by TASK id
 function findById(id) {
     return db('tasks')
         .where({ id })
@@ -29,6 +31,9 @@ function findById(id) {
 function findByUserId(user_id) {
     return db('tasks')
         .where('user_id', user_id)
+        .where('hidden_boolean', 0)
+        .where('completed_boolean', 0)
+        .orderBy('unix_timestamp', 'asc')
 }
 
 function update(changes, id) {
@@ -37,12 +42,28 @@ function update(changes, id) {
         .update(changes)
 }
 
+// this calls unhideAllForUser because the goal of showing next 20 is to see the next 20, including hidden ones
+// function findByUserId20(user_id) {
+//     return unhideAllForUser(user_id)
+//         .limit(20)
+// }
 
+async function findByUserId20(user_id) {
+    await db('tasks')
+        .where('user_id', user_id)
+        .update({ hidden_boolean: 0 })
+    return db('tasks')
+        .where('user_id', user_id)
+        .where('hidden_boolean', 0)
+        .where('completed_boolean', 0)
+        .orderBy('unix_timestamp', 'asc')
+        .limit(20)
+}
 
 async function hideAllForUser(user_id) {
     await db('tasks')
         .where('user_id', user_id)
-        .update({ hidden_boolean: 1});
+        .update({ hidden_boolean: 1 });
     return findByUserId(user_id);
 }
 

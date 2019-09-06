@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 // hideAllTasks, showAllTasks, showNext20 are not from "auth" portion
 import { hideAllTasks, showAllTasks, showNext20,
-    hideAllAuth, showAllAuth,
+    hideAllAuth, showAllAuth, show20Auth,
 } from '../Actions';
 
 const ShowHideButtonsDiv = styled.div`
@@ -37,10 +37,17 @@ class ShowHideButtons extends React.Component {
         this.props.showNext20();
     }
 
+    show20Auth = e => {
+        e.preventDefault();
+        this.props.show20Auth();
+    }
+
+
+
     render() {
         return (
             <ShowHideButtonsDiv>
-                <button onClick={this.showNext20} className="btn btn-secondary">Show Next 20</button>
+                <button onClick={this.show20Auth} className="btn btn-secondary">Show Next 20</button>
                 <button onClick={this.showAllAuth} className="btn btn-secondary">Show All</button>
                 <button onClick={this.hideAllAuth} className="btn btn-secondary">Hide All</button>
             </ShowHideButtonsDiv>
@@ -50,5 +57,5 @@ class ShowHideButtons extends React.Component {
 
 export default connect(null, { 
     hideAllTasks, showAllTasks, showNext20,
-    hideAllAuth, showAllAuth,
+    hideAllAuth, showAllAuth, show20Auth,
 })(ShowHideButtons);
